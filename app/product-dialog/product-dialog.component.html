@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+  <form [formGroup]="productForm" (ngSubmit)="submit()">
+  <div class="form-container">
+
+      <mat-form-field class="full-width">
+        <input matInput name="name" placeholder="Name"
+        [formControl]="productForm.controls['name']">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput type="number" name="price" placeholder="Price"
+        [formControl]="productForm.controls['price']">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput type="number" name="stock" placeholder="Stock"
+        [formControl]="productForm.controls['stock']">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput type="number" name="packing" placeholder="Packing"
+        [formControl]="productForm.controls['packing']">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput name="description" placeholder="Description"
+        [formControl]="productForm.controls['description']">
+      </mat-form-field>
+
+    <div>
+      <button mat-button [type]="submit" [disabled]="productForm.invalid">Save</button>
+      <span></span>
+      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+    </div>
+  </div>
+  </form>

@@ -1,0 +1,87 @@
+<div class="container mat-elevation-z8">
+
+  <div class="form">
+    <mat-form-field floatPlaceholder="never" color="accent">
+      <input matInput #filter (keyup)="applyFilter($event.target.value)" placeholder="Filter products">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.price}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="stock">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Stock</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.stock}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="packing">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Packing</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.packing}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.description}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button [ngClass]="{'positive' : row.status === 'Active', 'negative' : row.status !== 'Active'}" (click)="changeProductStatus(row)">
+            {{row.status}}
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="editItem({}, true)">
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let row;">
+        <button mat-icon-button color="primary" (click)="editItem(row)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" (click)="deleteItem(row)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+  <div class="no-results" [style.display]="dataSource?.length == 0 ? '' : 'none'">
+    No results
+  </div>
+
+  <mat-paginator #paginator
+                 [pageIndex]="0"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 25, 50, 100]">
+  </mat-paginator>
+</div>
