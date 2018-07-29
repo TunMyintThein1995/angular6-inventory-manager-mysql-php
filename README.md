@@ -1,6 +1,6 @@
 # Product – Inventory manager using Angular6, MySQL and PHP RESTful API
 
-![screenshot](screenshot.png)
+![Logo](screenshot.png)
 
 ## Introduction
 This is a fork of itswadesh/inventory-manager-mysql-php, in which the angularJS is replaced by angular6 with having the same functionality.
